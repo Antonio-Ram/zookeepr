@@ -5,6 +5,8 @@ const{ animals } = require('./data/animals')
 // we want that functionality to be accepting a request and sending back a resonse
 const express = require('express');
 
+//add the port
+const PORT = process.env.PORT || 3001;
 //initiate server
 const app = express();
 
@@ -57,6 +59,6 @@ app.get('/api/animals', (req, res) => {
 });
 
 //makes express listen
-app.listen(3001, () => {
-    console.log(`API server now on port 3001`);
+app.listen(PORT, () => {
+    console.log(`API server now on port ${PORT}!`);
 });
