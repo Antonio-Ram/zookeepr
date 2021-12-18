@@ -18,6 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 //parse incoming JSON data
 app.use(express.json());
 
+//make certain files readily available
+app.use(express.static('public'));
+
 //filter functionality
 function filterByQuery(query, animalsArray) {
     let personalityTraitsArray = [];
@@ -135,6 +138,26 @@ app.post('/api/animals', (req, res) => {
         const animal = createNewAnimal(req.body, animals);
         res.json(animal);
     }
+});
+
+//serve index.html from express.js server
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+//serves animals.html
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+//serves zookeepers.html
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+//wild card
+app.get('*', (req, res) => {+
+res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 //makes express listen
